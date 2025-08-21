@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { navLinks } from '../constants';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/all';
 
-	onMount(() => {
+	$effect(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
 		const context = gsap.context(() => {

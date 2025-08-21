@@ -1,13 +1,13 @@
 <script lang="ts">
 	import gsap from 'gsap';
 	import { ScrollTrigger, SplitText } from 'gsap/all';
-	import { onMount } from 'svelte';
+	import { onDestroy, untrack } from 'svelte';
 
 	let videoRef: HTMLVideoElement;
 
 	let isMobile = $state(false);
 
-	onMount(() => {
+	$effect(() => {
 		const mediaQuery = window.matchMedia('(max-width: 767px)');
 		isMobile = mediaQuery.matches;
 		const listener = () => {
@@ -20,7 +20,7 @@
 		};
 	});
 
-	onMount(() => {
+	$effect(() => {
 		gsap.registerPlugin(ScrollTrigger, SplitText);
 
 		// Create an async function to wait for fonts
@@ -64,8 +64,9 @@
 					.to('.right-leaf', { y: 200 }, 0)
 					.to('.left-leaf', { y: -200 }, 0);
 
-				const startValue = isMobile ? 'top 50%' : 'center 60%';
-				const endValue = isMobile ? '120% top' : 'bottom top';
+				// 2. Wrap reads of `isMobile` in untracked()
+				const startValue = untrack(() => (isMobile ? 'top 50%' : 'center 60%'));
+				const endValue = untrack(() => (isMobile ? '120% top' : 'bottom top'));
 
 				const videoTimeLine = gsap.timeline({
 					scrollTrigger: {
@@ -78,11 +79,18 @@
 				});
 
 				if (videoRef) {
-					videoRef.onloadedmetadata = () => {
+					const setupVideoAnimation = () => {
 						videoTimeLine.to(videoRef, {
 							currentTime: videoRef.duration
 						});
 					};
+
+					// 3. Add the readyState check for the video
+					if (videoRef.readyState >= videoRef.HAVE_METADATA) {
+						setupVideoAnimation();
+					} else {
+						videoRef.onloadedmetadata = setupVideoAnimation;
+					}
 				}
 			}); // End of context
 
@@ -95,11 +103,9 @@
 			ctx = context;
 		});
 
-		// The main cleanup function for the effect
-		return () => {
-			// Ensure context exists before trying to revert
+		onDestroy(() => {
 			ctx && ctx.revert();
-		};
+		});
 	});
 </script>
 
