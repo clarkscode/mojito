@@ -1,26 +1,35 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { navLinks } from '../constants';
 	import gsap from 'gsap';
-	$effect(() => {
-		const navTween = gsap.timeline({
-			scrollTrigger: {
-				trigger: 'nav',
-				start: 'bottom top'
-			}
-		});
+	import { ScrollTrigger } from 'gsap/all';
 
-		navTween.fromTo(
-			'nav',
-			{
-				backgroundColor: 'transparent'
-			},
-			{
-				backgroundColor: '#00000050',
-				backgroundFilter: 'blur(10px)',
-				duration: 1,
-				ease: 'power1.inOut'
-			}
-		);
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const context = gsap.context(() => {
+			const navTween = gsap.timeline({
+				scrollTrigger: {
+					trigger: 'nav',
+					start: 'bottom top'
+				}
+			});
+
+			navTween.fromTo(
+				'nav',
+				{
+					backgroundColor: 'transparent'
+				},
+				{
+					backgroundColor: '#00000050',
+					// backgroundFilter: 'blur(10px)',
+					duration: 1,
+					ease: 'power1.inOut'
+				}
+			);
+		});
+		// Return the cleanup function
+		return () => context.revert();
 	});
 </script>
 
