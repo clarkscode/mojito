@@ -18,7 +18,7 @@
 html,
 body {
 	width: 100%;
-	background-color: #07020d;
+	background-color: black;
 	color: white;
 	scroll-behavior: smooth;
 	overflow-x: hidden;
@@ -106,10 +106,6 @@ body {
 
 				p:nth-of-type(2) {
 					@apply font-modern-negra text-6xl text-yellow max-w-xl;
-				}
-
-				h1 {
-					@apply text-6xl font-modern-negra;
 				}
 
 				p:last-of-type {
