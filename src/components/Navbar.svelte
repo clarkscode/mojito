@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { navLinks } from '../constants';
 	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/all';
 
 	$effect(() => {
-		gsap.registerPlugin(ScrollTrigger);
-
 		const context = gsap.context(() => {
 			const navTween = gsap.timeline({
 				scrollTrigger: {

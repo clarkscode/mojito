@@ -1,6 +1,6 @@
 <script lang="ts">
 	import gsap from 'gsap';
-	import { ScrollTrigger, SplitText } from 'gsap/all';
+	import { SplitText } from 'gsap/all';
 	import { onDestroy, untrack } from 'svelte';
 
 	let videoRef: HTMLVideoElement;
@@ -21,8 +21,6 @@
 	});
 
 	$effect(() => {
-		gsap.registerPlugin(ScrollTrigger, SplitText);
-
 		// Create an async function to wait for fonts
 		const initAnimations = async () => {
 			// Wait for fonts to be ready to prevent SplitText layout shifts
@@ -31,7 +29,6 @@
 			const context = gsap.context(() => {
 				const heroSplit = new SplitText('.title', { type: 'chars, words' });
 				const paragraphSplit = new SplitText('.subtitle', { type: 'lines' });
-
 				heroSplit.chars.forEach((char) => {
 					char.classList.add('text-gradient');
 				});
@@ -71,8 +68,8 @@
 				const videoTimeLine = gsap.timeline({
 					scrollTrigger: {
 						trigger: videoRef,
-						start: 'top 50%',
-						end: '120% top',
+						start: startValue,
+						end: endValue,
 						scrub: true,
 						pin: true,
 						markers: true
@@ -134,7 +131,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="video absolute inset-0">
-		<video bind:this={videoRef} muted playsInline preload="auto" src="/videos/output.mp4"></video>
-	</div>
 </section>
+<div class="video absolute inset-0">
+	<video bind:this={videoRef} muted playsInline preload="auto" src="/videos/output.mp4"></video>
+</div>
