@@ -71,10 +71,11 @@
 				const videoTimeLine = gsap.timeline({
 					scrollTrigger: {
 						trigger: videoRef,
-						start: startValue,
-						end: endValue,
+						start: 'top 50%',
+						end: '120% top',
 						scrub: true,
-						pin: true
+						pin: true,
+						markers: true
 					}
 				});
 
@@ -109,7 +110,7 @@
 	});
 </script>
 
-<!-- <section id="hero" class="noisy">
+<section id="hero" class="noisy">
 	<h1 class="title uppercase">Mojito</h1>
 	<img src="/images/hero-left-leaf.png" alt="left leaf" class="left-leaf" />
 	<img src="/images/hero-right-leaf.png" alt="right leaf" class="right-leaf" />
@@ -133,9 +134,7 @@
 			</div>
 		</div>
 	</div>
-
-</section> -->
-
-<div class="video absolute inset-0">
-	<video bind:this={videoRef} muted playsInline preload="auto" src="/videos/output.mp4"></video>
-</div>
+	<div class="video absolute inset-0">
+		<video bind:this={videoRef} muted playsInline preload="auto" src="/videos/output.mp4"></video>
+	</div>
+</section>
