@@ -109,33 +109,31 @@
 	});
 </script>
 
-<div>
-	<section id="hero" class="noisy">
-		<h1 class="title uppercase">Mojito</h1>
-		<img src="/images/hero-left-leaf.png" alt="left leaf" class="left-leaf" />
-		<img src="/images/hero-right-leaf.png" alt="right leaf" class="right-leaf" />
-
-		<div class="body">
-			<div class="content">
-				<div class="space-y-5 hidden md:block">
-					<p>Cool. Crisp. Classic</p>
-					<p class="subtitle">
-						Sip The Spirit
-						<br />
-						of Summer
-					</p>
-				</div>
-				<div class="view-cocktails">
-					<p class="subtitle">
-						Every cocktail on our menu is a blend of premium ingredients, creative flair, and
-						timeless recipes — designed to delight your senses.
-					</p>
-					<a href="#cocktails" aria-label="view cocktails">View Cocktails</a>
-				</div>
-			</div>
-		</div>
-	</section>
+<section id="hero" class="noisy">
 	<div class="video absolute inset-0">
 		<video bind:this={videoRef} muted playsInline preload="auto" src="/videos/output.mp4"></video>
 	</div>
-</div>
+	<h1 class="title uppercase">Mojito</h1>
+	<img src="/images/hero-left-leaf.png" alt="left leaf" class="left-leaf" />
+	<img src="/images/hero-right-leaf.png" alt="right leaf" class="right-leaf" />
+
+	<div class="body">
+		<div class="content">
+			<div class="space-y-5 hidden md:block">
+				<p>Cool. Crisp. Classic</p>
+				<p class="subtitle">
+					Sip The Spirit
+					<br />
+					of Summer
+				</p>
+			</div>
+			<div class="view-cocktails">
+				<p class="subtitle">
+					Every cocktail on our menu is a blend of premium ingredients, creative flair, and timeless
+					recipes — designed to delight your senses.
+				</p>
+				<a href="#cocktails" aria-label="view cocktails">View Cocktails</a>
+			</div>
+		</div>
+	</div>
+</section>
